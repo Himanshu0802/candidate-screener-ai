@@ -722,6 +722,16 @@ export default function App() {
       setSelectedResumeName('');
       setActiveStep(1);
       setIsLandingScreen(true);
+      setSessionTelemetry({ input_tokens: 0, output_tokens: 0 });
+      setPhaseTelemetry({
+        1: { input_tokens: 0, output_tokens: 0 },
+        2: { input_tokens: 0, output_tokens: 0 },
+        3: { input_tokens: 0, output_tokens: 0 },
+        4: { input_tokens: 0, output_tokens: 0 },
+        5: { input_tokens: 0, output_tokens: 0 },
+        6: { input_tokens: 0, output_tokens: 0 },
+        7: { input_tokens: 0, output_tokens: 0 }
+      });
     }
   };
 
@@ -733,12 +743,42 @@ export default function App() {
       {(!isLandingScreen || isRegistryOpen) && (
         <header className="retro-header">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <h1 className="retro-title" style={{ cursor: 'pointer' }} onClick={() => { setIsLandingScreen(true); setIsRegistryOpen(false); }} title="RETURN TO SYSTEM HOME">
-                <Cpu className="neon-green" />
-                Candidate_screener.ai
-              </h1>
-              <div className="retro-subtitle">
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div style={{ 
+                display: 'inline-block',
+                border: '1px solid var(--text-cyan)', 
+                padding: '0.4rem 1rem', 
+                background: 'rgba(0, 229, 255, 0.03)',
+                boxShadow: '0 0 10px rgba(0, 229, 255, 0.12), inset 0 0 6px rgba(0, 229, 255, 0.08)',
+                borderRadius: isRetroTheme ? '0px' : '4px',
+                fontFamily: 'monospace',
+                cursor: 'pointer'
+              }} onClick={() => { setIsLandingScreen(true); setIsRegistryOpen(false); }} title="RETURN TO SYSTEM HOME">
+                <div style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: '800', 
+                  color: 'var(--text-cyan)', 
+                  textShadow: '0 0 6px rgba(0, 229, 255, 0.4)',
+                  letterSpacing: '1px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <Cpu className="neon-green" size={14} />
+                  ◢ Candidate_screener.ai ◣
+                </div>
+                <div style={{ 
+                  fontSize: '0.5rem', 
+                  color: '#888', 
+                  marginTop: '3px', 
+                  letterSpacing: '0.5px',
+                  textTransform: 'uppercase'
+                }}>
+                  Agentic Candidate Assessment Console // v1.0.4
+                </div>
+              </div>
+              
+              <div className="retro-subtitle" style={{ margin: 0 }}>
                 CODENAME: CANDIDATE_SCREENER.AI_PIPELINE // SECURE CORE OPERATIONAL INTERFACE
               </div>
             </div>
