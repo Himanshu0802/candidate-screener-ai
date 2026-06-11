@@ -2,7 +2,7 @@
 ### Agentic Candidate Assessment Console // ver. 1.0.4
 
 <p align="center">
-  <img src="frontend/src/assets/hero.png" alt="Candidate_screener.ai Logo" width="600" />
+  <img src="frontend/src/assets/logo.png" alt="Candidate_screener.ai Logo" width="600" />
 </p>
 
 > [!IMPORTANT]
