@@ -1,14 +1,9 @@
 # ◢ Candidate_screener.ai ◣
 ### Agentic Candidate Assessment Console // ver. 1.0.4
 
-```
-   _________    _   ______  ________  ___ _____ ______   _______________  _______  ___       ___    ____ 
-  / ___/ __ \  / | / / __ \/  _/ __ \/   |  __/  _/ __ \ / ___/ __/ __/  |/  / __ \/ _ \     /   |  /  _/ 
- / /__/ /_/ / /  |/ / /_/ // // /_/ / /| |  _|_// /_/ // /__/ _/ _/ / /|_/ / /_/ / ___/    / /| | _/ /   
- \___/\__,_/ /_/|_/____//___/____/_/ |_| |_/ |___/ .___/\___/____/___/_/  /_/\____/_/      /_/ |_|/___/  
-                                                 /_/                                                     
-  -- SYSTEM ENGINE ONLINE // SECURITY CORE OPERATIONAL INTERFACE --
-```
+<p align="center">
+  <img src="frontend/src/assets/hero.png" alt="Candidate_screener.ai Logo" width="600" />
+</p>
 
 > [!IMPORTANT]
 > **Candidate_screener.ai** is a high-speed, token-efficient candidate assessment console. Crafted in a **Neo-Retro Glassmorphic** theme, the interface features dynamic theme switching (Retro UI vs. Modern UI), interactive token telemetry, a live CLI execution log, and a real-time leaderboard showing ranked candidate screen verdicts.
