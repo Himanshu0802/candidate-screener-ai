@@ -17,6 +17,7 @@
 
 ## ⚙️ Core Diagnostics & Features
 
+* **`[X] Unified Console Branding & Mini-Logo Box`**: Displays a custom retro console logo container (`◢ Candidate_screener.ai ◣`) in a centered layout on the boot screen and integrates a compact, glowing version of this console box in the header banner on all subsequent screening steps.
 * **`[X] JD Ingestion & Library Dropdown`**: Load JDs from library or write custom ones. Includes single-click JD deletion.
 * **`[X] Dynamic Weighting Card Matrix`**: Prioritize job dimensions (*High, Medium, Low, Ignore*).
 * **`[X] Zero-LLM Rubric Compiler`**: Automatically compiles priority weights into a strict JSON-evaluation system prompt locally, saving tokens.
