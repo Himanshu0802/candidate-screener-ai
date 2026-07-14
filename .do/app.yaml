@@ -1,0 +1,22 @@
+name: candidate-screener-ai
+region: nyc
+services:
+  - name: backend
+    source_dir: backend
+    dockerfile_path: backend/Dockerfile
+    http_port: 8000
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: GEMINI_API_KEY
+        scope: RUN_TIME
+        value: "" # To be provided by user in the DigitalOcean dashboard
+
+  - name: frontend
+    source_dir: frontend
+    dockerfile_path: frontend/Dockerfile
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    # In DigitalOcean App Platform, this component routes external HTTP traffic.
+    # The frontend's nginx configuration proxies `/api` requests to `http://backend:8000/api` internally.
