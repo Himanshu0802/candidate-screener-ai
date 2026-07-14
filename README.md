@@ -1,14 +1,9 @@
 # ◢ Candidate_screener.ai ◣
 ### Agentic Candidate Assessment Console // ver. 1.0.4
 
-```
-   _____  ___   _  _  ___   ___  ___   __   _____  _  _  ____  ____ 
-  / ___/ / _ \ | \| ||   \ |_ _||   \ /  \ |_   _|| || ||  __||  _ \
- | (___ | (_) || .  || |) | | | | |) || /\ |  | |  | || || _)  |   /
-  \___/  \_/ \_||_|\_||___/ |___||___/ |_||_|  |_|  \___/|____||_|\_\
-  
-  -- SYSTEM ENGINE ONLINE // SECURITY CORE OPERATIONAL INTERFACE --
-```
+<p align="center">
+  <img src="frontend/src/assets/logo.png" alt="Candidate_screener.ai Logo" width="600" />
+</p>
 
 > [!IMPORTANT]
 > **Candidate_screener.ai** is a high-speed, token-efficient candidate assessment console. Crafted in a **Neo-Retro Glassmorphic** theme, the interface features dynamic theme switching (Retro UI vs. Modern UI), interactive token telemetry, a live CLI execution log, and a real-time leaderboard showing ranked candidate screen verdicts.
@@ -17,6 +12,7 @@
 
 ## ⚙️ Core Diagnostics & Features
 
+* **`[X] Unified Console Branding & Mini-Logo Box`**: Displays a custom retro console logo container (`◢ Candidate_screener.ai ◣`) in a centered layout on the boot screen and integrates a compact, glowing version of this console box in the header banner on all subsequent screening steps.
 * **`[X] JD Ingestion & Library Dropdown`**: Load JDs from library or write custom ones. Includes single-click JD deletion.
 * **`[X] Dynamic Weighting Card Matrix`**: Prioritize job dimensions (*High, Medium, Low, Ignore*).
 * **`[X] Zero-LLM Rubric Compiler`**: Automatically compiles priority weights into a strict JSON-evaluation system prompt locally, saving tokens.
