@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 import { Send, Terminal, ShieldAlert } from 'lucide-react';
 
 export default function RetroChatAssistant({ stepId, stepContext, apiConfig, onTokensSpent }) {
@@ -54,7 +56,7 @@ export default function RetroChatAssistant({ stepId, stepContext, apiConfig, onT
         text: m.text
       }));
 
-      const response = await fetch('http://127.0.0.1:8000/api/chat', {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

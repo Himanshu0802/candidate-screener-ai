@@ -22,6 +22,8 @@ import {
 import TokenTelemetry from './components/TokenTelemetry';
 import RetroChatAssistant from './components/RetroChatAssistant';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 export default function App() {
   // --- THEME STATE ---
   const [isLightTheme, setIsLightTheme] = useState(false);
@@ -185,7 +187,7 @@ export default function App() {
 
   const fetchSavedResumes = async () => {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/resumes');
+      const resp = await fetch(`${API_BASE_URL}/api/resumes`);
       if (resp.ok) {
         const data = await resp.json();
         setSavedResumes(data);
@@ -197,7 +199,7 @@ export default function App() {
 
   const fetchSavedJds = async () => {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/jds');
+      const resp = await fetch(`${API_BASE_URL}/api/jds`);
       if (resp.ok) {
         const data = await resp.json();
         setSavedJds(data);
@@ -209,7 +211,7 @@ export default function App() {
 
   const fetchCandidateRegistry = async () => {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/candidates');
+      const resp = await fetch(`${API_BASE_URL}/api/candidates`);
       if (resp.ok) {
         const data = await resp.json();
         setCandidateRegistry(data);
@@ -245,7 +247,7 @@ export default function App() {
       setJdTitle(suggested);
     }
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/jds', {
+      const resp = await fetch(`${API_BASE_URL}/api/jds`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -271,7 +273,7 @@ export default function App() {
       return;
     }
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/candidates', {
+      const resp = await fetch(`${API_BASE_URL}/api/candidates`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -295,7 +297,7 @@ export default function App() {
   const handleDeleteCandidate = async (id) => {
     if (!window.confirm("ARE YOU SURE you want to delete this candidate from the registry?")) return;
     try {
-      const resp = await fetch(`http://127.0.0.1:8000/api/candidates/${id}`, {
+      const resp = await fetch(`${API_BASE_URL}/api/candidates/${id}`, {
         method: 'DELETE'
       });
       if (!resp.ok) throw new Error("Failed to delete.");
@@ -326,7 +328,7 @@ export default function App() {
     setConfigSuccess(null);
     setConfigMessage("Pinging API endpoint...");
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/config/test', {
+      const resp = await fetch(`${API_BASE_URL}/api/config/test`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ config: apiConfig })
@@ -354,7 +356,7 @@ export default function App() {
     if (!jdText.trim()) return;
     setIsModularizing(true);
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/jd/modularize', {
+      const resp = await fetch(`${API_BASE_URL}/api/jd/modularize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ jd_text: jdText, config: apiConfig })
@@ -382,7 +384,7 @@ export default function App() {
   const handleCompileRubric = async () => {
     setIsCompilingRubric(true);
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/rubric/compile', {
+      const resp = await fetch(`${API_BASE_URL}/api/rubric/compile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ verticals })
@@ -422,7 +424,7 @@ export default function App() {
 
     try {
       const activeJdId = selectedJdId || 'jd_custom';
-      const url = `http://127.0.0.1:8000/api/resumes/cache?candidate_name=${encodeURIComponent(resumeName)}&jd_id=${encodeURIComponent(activeJdId)}`;
+      const url = `${API_BASE_URL}/api/resumes/cache?candidate_name=${encodeURIComponent(resumeName)}&jd_id=${encodeURIComponent(activeJdId)}`;
       const resp = await fetch(url);
       if (resp.ok) {
         const data = await resp.json();
@@ -446,7 +448,7 @@ export default function App() {
   const saveResumeToBackendCache = async (name, filename, text, currentMappings) => {
     if (!name.trim() || !text) return;
     try {
-      await fetch('http://127.0.0.1:8000/api/resumes/cache', {
+      await fetch(`${API_BASE_URL}/api/resumes/cache`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -466,7 +468,7 @@ export default function App() {
   const handleClearJds = async () => {
     if (!window.confirm("ARE YOU SURE you want to clear the entire Job Description library? This will delete all saved JDs.")) return;
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/jds/clear', { method: 'POST' });
+      const resp = await fetch(`${API_BASE_URL}/api/jds/clear`, { method: 'POST' });
       if (resp.ok) {
         alert("Job Description library cleared successfully.");
         setSelectedJdId('');
@@ -490,7 +492,7 @@ export default function App() {
     const title = jdToDelete ? jdToDelete.title : "this Job Description";
     if (!window.confirm(`ARE YOU SURE you want to delete the Job Description: "${title.toUpperCase()}"?`)) return;
     try {
-      const resp = await fetch(`http://127.0.0.1:8000/api/jds/${selectedJdId}`, { method: 'DELETE' });
+      const resp = await fetch(`${API_BASE_URL}/api/jds/${selectedJdId}`, { method: 'DELETE' });
       if (resp.ok) {
         alert("Job Description deleted successfully.");
         setSelectedJdId('');
@@ -511,7 +513,7 @@ export default function App() {
   const handleClearResumes = async () => {
     if (!window.confirm("ARE YOU SURE you want to clear the entire Resume archive cache? This will delete all saved candidate resumes and mappings.")) return;
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/resumes/clear', { method: 'POST' });
+      const resp = await fetch(`${API_BASE_URL}/api/resumes/clear`, { method: 'POST' });
       if (resp.ok) {
         alert("Resume archive cache cleared successfully.");
         setSelectedResumeName('');
@@ -569,7 +571,7 @@ export default function App() {
     formData.append('file', file);
 
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/resume/parse', {
+      const resp = await fetch(`${API_BASE_URL}/api/resume/parse`, {
         method: 'POST',
         body: formData
       });
@@ -588,7 +590,7 @@ export default function App() {
     if (!resumeText) return;
     setIsMappingChunks(true);
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/resume/map', {
+      const resp = await fetch(`${API_BASE_URL}/api/resume/map`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -622,7 +624,7 @@ export default function App() {
     const activeVerticals = verticals.filter(v => v.weight.lower ? v.weight.lower() !== "ignore" : v.weight.toLowerCase() !== "ignore");
     
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/agent/evaluate_batch', {
+      const resp = await fetch(`${API_BASE_URL}/api/agent/evaluate_batch`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -675,7 +677,7 @@ export default function App() {
   const handleSynthesizeVerdict = async () => {
     setIsSynthesizing(true);
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/agent/synthesize', {
+      const resp = await fetch(`${API_BASE_URL}/api/agent/synthesize`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
