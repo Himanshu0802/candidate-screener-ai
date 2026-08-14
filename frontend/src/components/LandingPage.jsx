@@ -10,7 +10,11 @@ import {
   Coins, 
   Search, 
   Settings,
-  ChevronRight
+  ChevronRight,
+  Key,
+  AlertTriangle,
+  ExternalLink,
+  CheckCircle2
 } from 'lucide-react';
 import logoImg from '../assets/logo.png';
 
@@ -20,6 +24,8 @@ export default function LandingPage({
   onOpenSettings,
   apiConfig
 }) {
+  const hasApiKey = Boolean(apiConfig?.api_key && apiConfig.api_key.trim().length > 5);
+
   return (
     <div className="landing-page-container minimal-aesthetic">
       {/* 1. Hero Section */}
@@ -55,6 +61,52 @@ export default function LandingPage({
           Automate multi-axis competency evaluations with zero-token caching, 
           upgrade candidate resumes with AI gap bridging, and query talent artifacts with Google ADK RAG.
         </p>
+
+        {/* Mandatory API Key Requirement Notice */}
+        <div className={`mandatory-api-banner ${hasApiKey ? 'configured' : 'needed'}`}>
+          <div className="api-banner-content">
+            <div className="api-banner-icon-box">
+              {hasApiKey ? (
+                <CheckCircle2 size={16} className="text-green" />
+              ) : (
+                <Key size={16} className="text-amber" />
+              )}
+            </div>
+            <div className="api-banner-text">
+              <div className="api-banner-title">
+                {hasApiKey ? (
+                  <span>Gemini API Key Connected</span>
+                ) : (
+                  <span>Google Gemini API Key Required</span>
+                )}
+              </div>
+              <div className="api-banner-desc">
+                {hasApiKey ? (
+                  <span>Ready to screen candidates and query multi-modal documents.</span>
+                ) : (
+                  <span>
+                    A valid Google Gemini API key is <strong>mandatory</strong> to run assessments, synthesize rubrics, and query RAG memory.{' '}
+                    <a 
+                      href="https://aistudio.google.com/app/apikey" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="external-key-link"
+                    >
+                      Get free key <ExternalLink size={10} />
+                    </a>
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+          <button 
+            className={`api-banner-btn ${hasApiKey ? 'outline' : 'action'}`}
+            onClick={onOpenSettings}
+          >
+            <Settings size={13} />
+            <span>{hasApiKey ? 'Manage Key' : 'Enter API Key'}</span>
+          </button>
+        </div>
 
         {/* Primary Action Buttons */}
         <div className="hero-cta-group minimal-cta-group">

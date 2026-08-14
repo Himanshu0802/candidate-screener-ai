@@ -17,6 +17,9 @@
 > [!IMPORTANT]
 > **Candidate_screener.ai** is an enterprise-grade, token-efficient candidate assessment engine and multi-modal RAG workbench. Built with a **Neo-Retro Glassmorphic UI**, the platform unites automated multi-agent candidate screening, tailored resume optimization, interactive talent copilots, and a Google Agent Development Kit (ADK) conversational RAG system with multi-strategy retrieval and real-time Gemini pricing telemetry.
 
+> [!WARNING]
+> **Mandatory API Key Requirement**: A valid **Google Gemini API Key** (or GCP Vertex AI service account) is **mandatory** to use this application. Without an API key, candidate evaluation agents, JD modularization, rubric compilation, resume optimization, and RAG conversational agents cannot execute. You can obtain a free API key at [Google AI Studio](https://aistudio.google.com/app/apikey) and enter it directly in the UI `[CONFIG / SETTINGS]` control panel.
+
 ---
 
 ## 🌟 Key Highlights & Feature Matrix
