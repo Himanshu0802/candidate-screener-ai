@@ -237,6 +237,34 @@ def call_llm_text(
     telemetry = TokenTelemetry(input_tokens=input_tokens, output_tokens=output_tokens)
     return response.text, telemetry
 
+def call_llm_text_stream(
+    config: APIKeyConfig,
+    prompt: str,
+    system_instruction: Optional[str] = None,
+    model_override: Optional[str] = None
+):
+    """
+    Calls the LLM yielding text chunks in real-time as they are streamed.
+    """
+    client = get_client(config)
+    model = model_override or get_model_name(config)
+
+    content_config = types.GenerateContentConfig(
+        temperature=0.2,
+    )
+    if system_instruction:
+        content_config.system_instruction = system_instruction
+
+    response_stream = client.models.generate_content_stream(
+        model=model,
+        contents=prompt,
+        config=content_config,
+    )
+
+    for chunk in response_stream:
+        if chunk.text:
+            yield chunk.text
+
 def call_llm_fallback(
     config: APIKeyConfig,
     prompt: str,
@@ -276,3 +304,51 @@ def call_llm_fallback(
     except Exception as parse_err:
         logger.error(f"Fallback JSON parsing failed. Cleaned response was: {cleaned}")
         raise ValueError(f"Failed to generate structured response from LLM: {parse_err}")
+
+def calculate_gemini_cost(model_name: str, input_tokens: int, output_tokens: int) -> float:
+    """Calculates estimated USD cost based on official Google Gemini model pricing rates."""
+    model_lower = model_name.lower()
+    
+    # Official Gemini Pricing Rates (per 1M tokens)
+    if "pro" in model_lower:
+        input_rate = 1.25   # $1.25 per 1M input tokens
+        output_rate = 5.00  # $5.00 per 1M output tokens
+    else:
+        # Default / Flash models (gemini-2.5-flash, gemini-2.0-flash, gemini-1.5-flash)
+        input_rate = 0.075  # $0.075 per 1M input tokens
+        output_rate = 0.30  # $0.30 per 1M output tokens
+
+    input_cost = (input_tokens / 1_000_000.0) * input_rate
+    output_cost = (output_tokens / 1_000_000.0) * output_rate
+    return round(input_cost + output_cost, 7)
+
+def list_available_models(config: APIKeyConfig) -> List[Dict[str, str]]:
+    """Discovers supported Gemini models for the provided API key / Vertex client."""
+    client = get_client(config)
+    discovered_models = []
+    
+    try:
+        models_pager = client.models.list()
+        for m in models_pager:
+            name = m.name or ""
+            # Filter for generative gemini models
+            if "gemini" in name.lower() and "embed" not in name.lower() and "bison" not in name.lower():
+                clean_name = name.replace("models/", "")
+                discovered_models.append({
+                    "name": clean_name,
+                    "display_name": clean_name.replace("-", " ").title()
+                })
+    except Exception as e:
+        logger.warning(f"Failed to list models dynamically via SDK pager: {e}")
+
+    # Fallback to standard list if pager yields empty or fails
+    if not discovered_models:
+        discovered_models = [
+            {"name": "gemini-2.5-flash", "display_name": "Gemini 2.5 Flash"},
+            {"name": "gemini-2.5-pro", "display_name": "Gemini 2.5 Pro"},
+            {"name": "gemini-2.0-flash-exp", "display_name": "Gemini 2.0 Flash Exp"},
+            {"name": "gemini-1.5-flash", "display_name": "Gemini 1.5 Flash"},
+            {"name": "gemini-1.5-pro", "display_name": "Gemini 1.5 Pro"}
+        ]
+    return discovered_models
+
