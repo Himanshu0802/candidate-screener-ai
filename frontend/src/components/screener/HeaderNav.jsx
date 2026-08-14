@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { 
   Cpu, 
   Settings, 
-  Sun, 
-  Moon, 
   FileText, 
   Layers, 
   Bot, 
@@ -19,8 +17,6 @@ export default function HeaderNav({
   setActiveMainView,
   isRegistryOpen,
   setIsRegistryOpen,
-  isLightTheme,
-  setIsLightTheme,
   isRetroTheme,
   setIsRetroTheme,
   onOpenSettings,

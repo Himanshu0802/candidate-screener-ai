@@ -36,17 +36,12 @@ export default function App() {
   // --- WORKBENCH VIEW STATE ---
   const [activeMainView, setActiveMainView] = useState('landing'); // 'landing', 'chat', 'screener', or 'rag'
 
-  // --- THEME STATE ---
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  // --- THEME STATE (PERMANENT DARK MODE) ---
   const [isRetroTheme, setIsRetroTheme] = useState(false);
 
   useEffect(() => {
-    if (isLightTheme) {
-      document.body.classList.add('light-theme');
-    } else {
-      document.body.classList.remove('light-theme');
-    }
-  }, [isLightTheme]);
+    document.body.classList.remove('light-theme');
+  }, []);
 
   useEffect(() => {
     if (isRetroTheme) {
@@ -922,13 +917,15 @@ export default function App() {
       {/* 2. Main Content Area */}
       <main className="modern-main-layout full-width-workspace">
         {activeMainView === 'landing' ? (
-          <LandingPage
-            setActiveMainView={setActiveMainView}
-            setIsRegistryOpen={setIsRegistryOpen}
-            onOpenSettings={() => setIsSettingsOpen(true)}
-            apiConfig={apiConfig}
-            sessionTelemetry={sessionTelemetry}
-          />
+          <div className="landing-page-scroll-container">
+            <LandingPage
+              setActiveMainView={setActiveMainView}
+              setIsRegistryOpen={setIsRegistryOpen}
+              onOpenSettings={() => setIsSettingsOpen(true)}
+              apiConfig={apiConfig}
+              sessionTelemetry={sessionTelemetry}
+            />
+          </div>
         ) : activeMainView === 'rag' ? (
           <RAGWorkbench apiConfig={apiConfig} />
         ) : activeMainView === 'chat' ? (
@@ -946,8 +943,6 @@ export default function App() {
             }}
             fetchCandidateRegistry={fetchCandidateRegistry}
             onOpenSettings={() => setIsSettingsOpen(true)}
-            isLightTheme={isLightTheme}
-            setIsLightTheme={setIsLightTheme}
             onReset={handleReset}
           />
         ) : (
@@ -1134,14 +1129,6 @@ export default function App() {
           title="API & Model Settings"
         >
           <Settings size={18} />
-        </button>
-
-        <button
-          onClick={() => setIsLightTheme(!isLightTheme)}
-          className="rail-icon-btn"
-          title={isLightTheme ? "Switch to Dark Mode" : "Switch to Light Mode"}
-        >
-          {isLightTheme ? <Moon size={18} /> : <Sun size={18} />}
         </button>
 
         <button

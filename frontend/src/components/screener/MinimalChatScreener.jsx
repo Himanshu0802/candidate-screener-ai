@@ -46,8 +46,6 @@ export default function MinimalChatScreener({
   onOpenAlignedModal,
   fetchCandidateRegistry,
   onOpenSettings,
-  isLightTheme,
-  setIsLightTheme,
   onReset
 }) {
   const [sessions, setSessions] = useState(() => {
