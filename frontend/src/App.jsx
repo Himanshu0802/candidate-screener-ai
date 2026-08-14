@@ -9,7 +9,8 @@ import {
   Sun, 
   Moon, 
   RotateCcw, 
-  Coins 
+  Coins,
+  Home
 } from 'lucide-react';
 import HeaderNav from './components/screener/HeaderNav';
 import SettingsDrawer from './components/screener/SettingsDrawer';
@@ -27,12 +28,13 @@ import VerdictCard from './components/screener/VerdictCard';
 
 import RAGWorkbench from './components/RAGWorkbench';
 import MinimalChatScreener from './components/screener/MinimalChatScreener';
+import LandingPage from './components/LandingPage';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
 export default function App() {
   // --- WORKBENCH VIEW STATE ---
-  const [activeMainView, setActiveMainView] = useState('chat'); // 'screener', 'chat', or 'rag'
+  const [activeMainView, setActiveMainView] = useState('landing'); // 'landing', 'chat', 'screener', or 'rag'
 
   // --- THEME STATE ---
   const [isLightTheme, setIsLightTheme] = useState(false);
@@ -844,9 +846,9 @@ export default function App() {
           className="rail-top-brand"
           onClick={() => {
             setIsRegistryOpen(false);
-            setActiveMainView('screener');
+            setActiveMainView('landing');
           }}
-          title="screener.ai"
+          title="Candidate Screener AI - Home"
         >
           <div className="brand-logo-glow">
             <Cpu size={20} className="brand-icon" />
@@ -855,15 +857,15 @@ export default function App() {
 
         <div className="rail-nav-group">
           <button
-            className={`rail-nav-btn ${activeMainView === 'screener' && !isRegistryOpen ? 'active' : ''}`}
+            className={`rail-nav-btn ${activeMainView === 'landing' && !isRegistryOpen ? 'active' : ''}`}
             onClick={() => {
               setIsRegistryOpen(false);
-              setActiveMainView('screener');
+              setActiveMainView('landing');
             }}
-            title="Interactive Pipeline"
+            title="Overview & Key Features"
           >
-            <Layers size={18} />
-            <span className="rail-btn-label">Pipeline</span>
+            <Home size={18} />
+            <span className="rail-btn-label">Home</span>
           </button>
 
           <button
@@ -876,6 +878,18 @@ export default function App() {
           >
             <Sparkles size={18} className="neon-cyan" />
             <span className="rail-btn-label">Chat</span>
+          </button>
+
+          <button
+            className={`rail-nav-btn ${activeMainView === 'screener' && !isRegistryOpen ? 'active' : ''}`}
+            onClick={() => {
+              setIsRegistryOpen(false);
+              setActiveMainView('screener');
+            }}
+            title="Interactive Pipeline"
+          >
+            <Layers size={18} />
+            <span className="rail-btn-label">Pipeline</span>
           </button>
 
           <button
@@ -907,7 +921,15 @@ export default function App() {
 
       {/* 2. Main Content Area */}
       <main className="modern-main-layout full-width-workspace">
-        {activeMainView === 'rag' ? (
+        {activeMainView === 'landing' ? (
+          <LandingPage
+            setActiveMainView={setActiveMainView}
+            setIsRegistryOpen={setIsRegistryOpen}
+            onOpenSettings={() => setIsSettingsOpen(true)}
+            apiConfig={apiConfig}
+            sessionTelemetry={sessionTelemetry}
+          />
+        ) : activeMainView === 'rag' ? (
           <RAGWorkbench apiConfig={apiConfig} />
         ) : activeMainView === 'chat' ? (
           <MinimalChatScreener

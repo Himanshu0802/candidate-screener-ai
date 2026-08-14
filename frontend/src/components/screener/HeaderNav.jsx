@@ -10,7 +10,8 @@ import {
   Sparkles, 
   Coins, 
   ChevronDown,
-  RotateCcw
+  RotateCcw,
+  Home
 } from 'lucide-react';
 
 export default function HeaderNav({
@@ -48,9 +49,9 @@ export default function HeaderNav({
           className="brand-pill"
           onClick={() => {
             setIsRegistryOpen(false);
-            setActiveMainView('screener');
+            setActiveMainView('landing');
           }}
-          title="Candidate Screener AI"
+          title="Candidate Screener AI - Home"
         >
           <div className="brand-logo-glow">
             <Cpu size={18} className="brand-icon" />
@@ -71,15 +72,15 @@ export default function HeaderNav({
       {/* Center Icon Navigation */}
       <div className="view-switcher-pill">
         <button
-          className={`view-tab-btn ${activeMainView === 'screener' && !isRegistryOpen ? 'active' : ''}`}
+          className={`view-tab-btn ${activeMainView === 'landing' && !isRegistryOpen ? 'active' : ''}`}
           onClick={() => {
             setIsRegistryOpen(false);
-            setActiveMainView('screener');
+            setActiveMainView('landing');
           }}
-          title="Interactive Pipeline Cards"
+          title="Overview & Key Features"
         >
-          <Layers size={16} />
-          <span>Pipeline</span>
+          <Home size={16} />
+          <span>Home</span>
         </button>
 
         <button
@@ -92,6 +93,18 @@ export default function HeaderNav({
         >
           <Sparkles size={16} className="neon-cyan" />
           <span>Agent Chat</span>
+        </button>
+
+        <button
+          className={`view-tab-btn ${activeMainView === 'screener' && !isRegistryOpen ? 'active' : ''}`}
+          onClick={() => {
+            setIsRegistryOpen(false);
+            setActiveMainView('screener');
+          }}
+          title="Interactive Pipeline Cards"
+        >
+          <Layers size={16} />
+          <span>Pipeline</span>
         </button>
 
         <button

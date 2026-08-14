@@ -86,6 +86,7 @@ graph TD
 * **`Dual-Layer Persistence`**: Built with Redis backend caching and zero-dependency local JSON file fallbacks (`jds.json`, `candidates.json`, `resumes.json`, `pipeline_cache.json`, `rag_sessions.json`).
 
 ### 🎨 7. Unified Neo-Retro Glassmorphic Design System
+* **`Minimalist Interactive Landing Page`**: High-impact portal highlighting core capabilities, architecture workflow steps, live metrics, and 1-click launch shortcuts into all 3 workspaces.
 * **`Triple-Theme Engine`**: Cyber Dark (default), Clean Light, and Neo-Retro Cyberpunk themes.
 * **`Fluid Animations & Progress Telemetry`**: Micro-animations, responsive glassmorphic cards, custom scrollbars, and branded header navigation.
 
