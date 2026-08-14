@@ -43,6 +43,42 @@ graph TD
 
 ---
 
+## 📸 Application Screenshots & Walkthrough
+
+### 🏠 1. Minimalist Interactive Landing Page
+*High-impact dark glass portal featuring active model indicator, mandatory API key setup notice, real-time metrics strip, and 1-click workspace shortcuts.*
+
+<p align="center">
+  <img src="docs/screenshots/01_landing_hero.png" alt="Candidate_screener.ai Landing Page Hero & Metrics" width="900" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/02_landing_workspaces.png" alt="Candidate_screener.ai Three Dedicated Workspaces & Pipeline Flow" width="900" />
+</p>
+
+### ⚡ 2. Autonomous Agent Chat Screener
+*1-Click automated screening interface with real-time SSE execution logs, zero-token pipeline caching, definitive FIT/MISS verdict synthesis, and context-aware talent copilot.*
+
+<p align="center">
+  <img src="docs/screenshots/03_autonomous_screener_chat.png" alt="Candidate_screener.ai Autonomous Screening Copilot with Real-Time SSE Streaming" width="900" />
+</p>
+
+### 🔬 3. Deep-Dive 6-Step Modular Assessment Pipeline
+*Granular human-in-the-loop workflow: JD modularization, calibrated weighting, PDF/DOCX evidence mapping, batch agent scoring, scorecard stack, and AI resume optimization.*
+
+<p align="center">
+  <img src="docs/screenshots/04_modular_pipeline.png" alt="Candidate_screener.ai 6-Step Modular Assessment Pipeline" width="900" />
+</p>
+
+### 🤖 4. Google ADK Multi-Modal RAG Chat Workbench
+*Conversational document intelligence powered by Google ADK with 4 hybrid search strategies (HNSW, IVFFlat, BM25, GraphQA), rolling memory compression, artifact scope filtering, and RAGAS evaluations.*
+
+<p align="center">
+  <img src="docs/screenshots/05_adk_rag_workbench.png" alt="Candidate_screener.ai Google ADK Multi-Modal RAG Workbench" width="900" />
+</p>
+
+---
+
 ## ⚙️ Core Diagnostics & Features
 
 ### ⚡ 1. Autonomous Screening Copilot & Live Streaming Pipeline
